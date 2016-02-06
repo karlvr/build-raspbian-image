@@ -10,6 +10,7 @@ chmod +x $ROOTDIR/usr/sbin/policy-rc.d
 # Configure apt.
 export DEBIAN_FRONTEND=noninteractive
 cat raspbian.org.gpg | chroot $ROOTDIR apt-key add -
+cat raspberrypi.gpg | chroot $ROOTDIR apt-key add -
 mkdir -p $ROOTDIR/etc/apt/sources.list.d/
 mkdir -p $ROOTDIR/etc/apt/apt.conf.d/
 echo "Acquire::http { Proxy \"http://[::1]:3142\"; };" > $ROOTDIR/etc/apt/apt.conf.d/50apt-cacher-ng
@@ -34,10 +35,8 @@ cp etc/network/interfaces $ROOTDIR/etc/network/interfaces
 
 # Install kernel.
 mkdir -p $ROOTDIR/lib/modules
-chroot $ROOTDIR apt-get install -y ca-certificates curl binutils git-core kmod
-wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O $ROOTDIR/usr/local/sbin/rpi-update
-chmod a+x $ROOTDIR/usr/local/sbin/rpi-update
-SKIP_WARNING=1 SKIP_BACKUP=1 ROOT_PATH=$ROOTDIR BOOT_PATH=$ROOTDIR/boot $ROOTDIR/usr/local/sbin/rpi-update
+chroot $ROOTDIR apt-get install -y ca-certificates kmod rpi-update
+SKIP_WARNING=1 SKIP_BACKUP=1 ROOT_PATH=$ROOTDIR BOOT_PATH=$ROOTDIR/boot $ROOTDIR/usr/bin/rpi-update
 
 # Install extra packages.
 chroot $ROOTDIR apt-get install -y apt-utils vim nano whiptail netbase less iputils-ping net-tools isc-dhcp-client man-db
