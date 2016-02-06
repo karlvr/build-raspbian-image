@@ -18,13 +18,6 @@ cp etc/apt/sources.list $ROOTDIR/etc/apt/sources.list
 cp etc/apt/apt.conf.d/50raspi $ROOTDIR/etc/apt/apt.conf.d/50raspi
 chroot $ROOTDIR apt-get update
 
-# Regenerate SSH host keys on first boot.
-chroot $ROOTDIR apt-get install -y openssh-server
-cp etc/rc.local $ROOTDIR/etc/rc.local
-chmod a+x $ROOTDIR/etc/rc.local
-rm -f $ROOTDIR/etc/ssh/ssh_host_*
-chroot $ROOTDIR update-rc.d rc.local defaults
-
 # Configure.
 cp boot/cmdline.txt $ROOTDIR/boot/cmdline.txt
 cp boot/config.txt $ROOTDIR/boot/config.txt
@@ -41,6 +34,10 @@ SKIP_WARNING=1 SKIP_BACKUP=1 ROOT_PATH=$ROOTDIR BOOT_PATH=$ROOTDIR/boot $ROOTDIR
 # Install extra packages.
 chroot $ROOTDIR apt-get install -y apt-utils vim nano whiptail netbase less iputils-ping net-tools isc-dhcp-client man-db
 chroot $ROOTDIR apt-get install -y anacron fake-hwclock
+
+# Regenerate SSH host keys on first boot.
+chroot $ROOTDIR apt-get install -y openssh-server ssh-regen-startup
+rm -f $ROOTDIR/etc/ssh/ssh_host_*
 
 # Install other recommended packages.
 #apt-get install ntp apt-cron fail2ban needrestart
