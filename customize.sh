@@ -7,6 +7,8 @@ ROOTDIR="$1"
 echo exit 101 > $ROOTDIR/usr/sbin/policy-rc.d
 chmod +x $ROOTDIR/usr/sbin/policy-rc.d
 
+export LANG=POSIX
+
 # Configure apt.
 export DEBIAN_FRONTEND=noninteractive
 cat raspbian.org.gpg | chroot $ROOTDIR apt-key add -
