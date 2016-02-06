@@ -39,6 +39,11 @@ chroot $ROOTDIR apt-get install -y anacron fake-hwclock
 chroot $ROOTDIR apt-get install -y openssh-server ssh-regen-startup
 rm -f $ROOTDIR/etc/ssh/ssh_host_*
 
+# Raspberry Pi packages.
+# /spindle_install stops raspi-copies-and-fills from creating /etc/ld.so.preload and breaking qemu.
+touch $ROOTDIR/spindle_install
+chroot $ROOTDIR apt-get install -y raspi-config raspi-copies-and-fills rng-tools
+
 # Install other recommended packages.
 #apt-get install ntp apt-cron fail2ban needrestart
 
@@ -46,6 +51,11 @@ rm -f $ROOTDIR/etc/ssh/ssh_host_*
 #dd if=/dev/zero of=$ROOTDIR/var/swapfile bs=1M count=512
 #chroot $ROOTDIR mkswap /var/swapfile
 #echo /var/swapfile none swap sw 0 0 >> $ROOTDIR/etc/fstab
+
+# Run fixup script on first boot.
+cp etc/rc.local $ROOTDIR/etc/rc.local
+chmod a+x $ROOTDIR/etc/rc.local
+chroot $ROOTDIR update-rc.d rc.local defaults
 
 # Done.
 rm $ROOTDIR/usr/sbin/policy-rc.d
