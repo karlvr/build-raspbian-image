@@ -46,6 +46,7 @@ chroot $ROOTDIR apt-get install -y raspi-config raspi-copies-and-fills rng-tools
 
 # Install other recommended packages.
 #apt-get install ntp apt-cron fail2ban needrestart
+chroot $ROOTDIR apt-get install -y ntp avahi-daemon
 
 # Create a swapfile.
 #dd if=/dev/zero of=$ROOTDIR/var/swapfile bs=1M count=512
