@@ -8,7 +8,9 @@ vmdebootstrap \
     --size 2000M \
     --bootsize 64M \
     --boottype vfat \
-    --root-password raspberry \
+    --lock-root-password \
+    --sudo \
+    --user pi/raspberry \
     --enable-dhcp \
     --verbose \
     --no-kernel \
