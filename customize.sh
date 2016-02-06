@@ -32,7 +32,7 @@ chroot $ROOTDIR apt-get install -y ca-certificates kmod rpi-update
 SKIP_WARNING=1 SKIP_BACKUP=1 ROOT_PATH=$ROOTDIR BOOT_PATH=$ROOTDIR/boot $ROOTDIR/usr/bin/rpi-update
 
 # Install extra packages.
-chroot $ROOTDIR apt-get install -y apt-utils vim nano whiptail netbase less iputils-ping net-tools isc-dhcp-client man-db
+chroot $ROOTDIR apt-get install -y apt-utils vim-tiny nano whiptail netbase less iputils-ping net-tools isc-dhcp-client man-db
 chroot $ROOTDIR apt-get install -y anacron fake-hwclock
 
 # Regenerate SSH host keys on first boot.
