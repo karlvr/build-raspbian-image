@@ -59,6 +59,12 @@ chroot $ROOTDIR apt-get install -y ntp avahi-daemon
 #chroot $ROOTDIR mkswap /var/swapfile
 #echo /var/swapfile none swap sw 0 0 >> $ROOTDIR/etc/fstab
 
+# Customize2.
+if [ -f customize2.sh ]; then
+	cp customize2.sh $ROOTDIR/
+	chmod +x $ROOTDIR/customize2.sh
+	chroot $ROOTDIR /customize2.sh
+fi
 
 # Done.
 rm $ROOTDIR/usr/sbin/policy-rc.d
