@@ -27,7 +27,7 @@ vmdebootstrap \
     --no-extlinux \
     --hostname raspberry \
     --foreign /usr/bin/qemu-arm-static \
-    --debootstrapopts="variant=minbase keyring=`pwd`/raspbian.org.gpg" \
-    --customize `pwd`/customize.sh
+    --debootstrapopts="variant=minbase keyring=$(dirname $0)/raspbian.org.gpg" \
+    --customize $(dirname $0)/customize.sh
 
 $(dirname $0)/autosizer.sh "$IMAGE"
