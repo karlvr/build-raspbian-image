@@ -1,4 +1,12 @@
-#!/bin/sh
+#!/bin/sh -e
+
+check_installed() {
+    type $1 2>&1 >/dev/null || { echo >&2 "$1 not installed"; exit 1; }
+}
+
+check_installed vmdebootstrap
+check_installed apt-cacher-ng
+check_installed qemu-arm-static
 
 vmdebootstrap \
     --arch armhf \
