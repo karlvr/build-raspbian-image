@@ -1,0 +1,29 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          firstboot
+# Required-Start:    $local_fs
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# Short-Description: First boot script
+### END INIT INFO
+
+# Fix ld.so.preload from raspi-copies-and-fills.
+mv /etc/ld.so.preload.disabled /etc/ld.so.preload
+
+# Regenerate SSH keys.
+echo "Regenerating host keys ..." >> /dev/kmsg
+
+## Drain entropy pool.
+dd if=/dev/urandom of=/dev/null bs=1024 count=10 2>/dev/null
+
+## Regenerate the keys.
+rm -f /etc/ssh/ssh_host_*
+export DEBIAN_FRONTEND=noninteractive
+dpkg-reconfigure openssh-server
+
+# Remove firstboot.
+rm /etc/init.d/firstboot
+update-rc.d firstboot remove
+
+exit 0
