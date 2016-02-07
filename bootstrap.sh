@@ -11,6 +11,7 @@ check_installed qemu-arm-static
 if [ -z "$MIRROR" ]; then
     MIRROR=mirrordirector.raspbian.org/raspbian
 fi
+export MIRROR
 
 IMAGE=`date +raspbian-%Y%m%d.img`
 
