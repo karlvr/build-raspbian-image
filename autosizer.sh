@@ -1,6 +1,7 @@
 #!/bin/bash -e
 # Automatic Image file resizer
 # Written by SirLagz
+# http://sirlagz.net/2013/03/10/script-automatic-rpi-image-downsizer/
 strImgFile=$1
 
 if [[ ! $(whoami) =~ "root" ]]; then
