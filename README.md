@@ -29,6 +29,9 @@ Usage
 
 Run `./bootstrap.sh` as root to create a fresh raspbian-yyyy-mm-dd.img in the current directory.
 
+The install uses http://mirrordirector.rasbian.org/raspbian/ but you can override this by setting the
+`MIRROR` environment variable, e.g. `sudo MIRROR=raspbian.mirrors.lucidnetworks.net/raspbian/ ./bootstrap.sh`
+
 Writing the image to an SD card
 -------------------------------
 

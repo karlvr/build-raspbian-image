@@ -22,6 +22,7 @@ mkdir -p $ROOTDIR/etc/apt/sources.list.d/
 mkdir -p $ROOTDIR/etc/apt/apt.conf.d/
 echo "Acquire::http { Proxy \"http://[::1]:3142\"; };" > $ROOTDIR/etc/apt/apt.conf.d/50apt-cacher-ng
 cp etc/apt/sources.list $ROOTDIR/etc/apt/sources.list
+sed -e 's|mirrordirector\.raspbian\.org/raspbian/|$MIRROR|' --in-place $ROOTDIR/etc/apt/sources.list
 cp etc/apt/apt.conf.d/50raspi $ROOTDIR/etc/apt/apt.conf.d/50raspi
 chroot $ROOTDIR apt-get update
 

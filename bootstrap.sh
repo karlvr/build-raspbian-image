@@ -8,12 +8,16 @@ check_installed vmdebootstrap
 check_installed apt-cacher-ng
 check_installed qemu-arm-static
 
+if [ -z "$MIRROR" ]; then
+    MIRROR=mirrordirector.raspbian.org/raspbian
+fi
+
 IMAGE=`date +raspbian-%Y%m%d.img`
 
 vmdebootstrap \
     --arch armhf \
     --distribution jessie \
-    --mirror http://[::1]:3142/archive.raspbian.org/raspbian \
+    --mirror http://[::1]:3142/$MIRROR \
     --image "$IMAGE" \
     --size 2000M \
     --bootsize 64M \

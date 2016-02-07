@@ -1,5 +1,5 @@
-deb http://archive.raspbian.org/raspbian/ jessie main contrib non-free
-#deb-src http://archive.raspbian.org/raspbian/ jessie main contrib non-free
+deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free
+#deb-src http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free
 
 # For Raspberry Pi specifics
 deb http://archive.raspberrypi.org/debian jessie main
