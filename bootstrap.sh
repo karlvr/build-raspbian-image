@@ -8,11 +8,13 @@ check_installed vmdebootstrap
 check_installed apt-cacher-ng
 check_installed qemu-arm-static
 
+IMAGE=`date +raspbian-%Y%m%d.img`
+
 vmdebootstrap \
     --arch armhf \
     --distribution jessie \
     --mirror http://[::1]:3142/archive.raspbian.org/raspbian \
-    --image `date +raspbian-%Y%m%d.img` \
+    --image "$IMAGE" \
     --size 2000M \
     --bootsize 64M \
     --boottype vfat \
@@ -27,3 +29,5 @@ vmdebootstrap \
     --foreign /usr/bin/qemu-arm-static \
     --debootstrapopts="variant=minbase keyring=`pwd`/raspbian.org.gpg" \
     --customize `pwd`/customize.sh
+
+$(dirname $0)/autosizer.sh "$IMAGE"
