@@ -48,7 +48,7 @@ rm -f $ROOTDIR/etc/ssh/ssh_host_*
 # Raspberry Pi packages.
 # /spindle_install stops raspi-copies-and-fills from creating /etc/ld.so.preload and breaking qemu.
 touch $ROOTDIR/spindle_install
-chroot $ROOTDIR apt-get install -y raspi-config raspi-copies-and-fills rng-tools
+chroot $ROOTDIR apt-get install -y raspi-config raspi-copies-and-fills rng-tools locales
 
 # Install other recommended packages.
 #apt-get install ntp apt-cron fail2ban needrestart
