@@ -1,65 +1,50 @@
 build-raspbian-image
 ====================
-Builds a minimal [Raspbian](http://raspbian.org/) Stretch image.
+Builds a minimal [Raspbian](http://raspbian.org/) image. Currently uses Raspbian Jessie.
 
-Login: `root`  
+Login: `pi`  
 Password: `raspberry`
 
-Only a basic Debian with standard networking utilities.
+A basic Raspbian with standard networking utilities. Also includes:
+
+ * `raspi-config`, `rpi-update` and other Raspberry Pi must-haves.
+ * `ntp`
+ * `avahi-daemon`
 
 **:exclamation: Careful: As an exception openssh-server is pre-installed and
-will allow root login with the default password.** Host keys are generated on
+will allow login with the default password.** Host keys are generated on
 first boot.
-
-Downloads
----------
-
-Latest download (Raspbian Stretch): [raspbian-20150729.img.zip](https://www.dropbox.com/s/dejepys2h9u5j55/raspbian-20150729.img.zip?dl=1) (263MB)  
-SHA1: `481a39566af76d942f7a24fc48cb9d5361e0d524`  
-SHA256: `425452d0edaae4f4e21177295bae01d1300b530d00b7278d2b7a947fb27bb1ab`  
-GPG Signature: [raspbian-20150729.img.zip.asc](/raspbian-20150729.img.zip.asc)
-
-Raspbian Jessie: [raspbian-20150214.img.zip](https://www.dropbox.com/s/hunl4libi6hdy14/raspbian-20150214.img.zip?dl=1) (214MB)  
-SHA1: `ad16b80dd8b59eb64d069dda2fdfeb01175e2c74`  
-SHA256: `3067de2bcd29536aaa72a1925febab62490fc973d982f936a3d0b82365658fa5`  
-GPG Signature: [raspbian-20150214.img.zip.asc](/raspbian-20150214.img.zip.asc)
 
 Dependencies
 ------------
 
- * `apt-get install apt-cacher-ng` or change mirror URLs in `bootstrap.sh`
-    and `customize.sh`.
+ * `apt-get install apt-cacher-ng` or change mirror URLs in `bootstrap.sh`.
 
- * `apt-get install vmdebootstrap` (at least `0.11` required)
+ * `apt-get install vmdebootstrap` (at least `0.11` required, perhaps use https://launchpad.net/~0k53d-karl-f830m/+archive/ubuntu/vmdebootstrap)
 
  * `apt-get install binfmt-support qemu-user-static`.
-
- * `apt-get install ca-certificates curl binutils git-core kmod` (required
-   by the rpi-update script).
 
 Usage
 -----
 
-Run `./bootstrap.sh` (probably root required for loopback device management)
-to create a fresh raspbian-yyyy-mm-dd.img in the current directory.
+Run `./bootstrap.sh` as root to create a fresh raspbian-yyyy-mm-dd.img in the current directory.
 
 Writing the image to an SD card
 -------------------------------
 
 `dd if=raspbian-yyyy-mm-dd.img of=/dev/mmcblk0 bs=1M && sync`
 
+First boot
+----------
+
+ * Run `raspi-config` and resize the filesystem to fit the SD card. Otherwise you fill run out of space in the root filesystem.
+
+ * Run `raspi-config` to configure time zone and locales, under Internationalisation Options.
+
 Recommended packages
 --------------------
 
  * Install `console-common` to select a keyboard layout.
-
- * Install `ntp` to automatically synchronize the clock over the network.
-   Without a synchronized clock there may be problems when checking validity
-   and expiration dates of SSL certificates.  Also `dpkg-reconfigure tzdata`
-   to select a time zone.
-
- * Install `locales`. Also `dpkg-reconfigure locales` and select at least one
-   UTF-8 locale to generate.
 
  * Install `iptables` for firewall configuration. Sample
    `/etc/network/iptables`:
@@ -88,22 +73,6 @@ Recommended packages
  * Install `apt-cron` to automatically look for package updates. Regularly
    updates the package lists (but does not install anything) if installed
    without any reconfiguration.
-
- * Install `avahi-daemon` to broadcast the device address to the local network
-   using Zeroconf / Bonjour.
-
-Resize the root partition to the SD card
-----------------------------------------
-
-The default image is effectly about 200MB but actually comes with a 2GB root
-parition. Its likely the the SD card is much bigger.
-
- 1. Boot. Login. `fdisk /dev/mmcblk0p1`. Delete the partition.
-    Create a new primary ext4 parition.
-
- 2. Reboot.
-
- 3. Login. `resize2fs /dev/mmcblk0p1`.
 
 Optimize for heavy RAM usage
 ----------------------------
