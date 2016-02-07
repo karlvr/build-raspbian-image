@@ -9,6 +9,11 @@ chmod +x $ROOTDIR/usr/sbin/policy-rc.d
 
 export LANG=POSIX
 
+# First boot script.
+cp etc/init.d/firstboot $ROOTDIR/etc/init.d/firstboot
+chmod a+x $ROOTDIR/etc/init.d/firstboot
+chroot $ROOTDIR update-rc.d firstboot defaults
+
 # Configure apt.
 export DEBIAN_FRONTEND=noninteractive
 cat raspbian.org.gpg | chroot $ROOTDIR apt-key add -
@@ -37,7 +42,7 @@ chroot $ROOTDIR apt-get install -y apt-utils vim-tiny nano whiptail netbase less
 chroot $ROOTDIR apt-get install -y anacron fake-hwclock
 
 # Regenerate SSH host keys on first boot.
-chroot $ROOTDIR apt-get install -y openssh-server ssh-regen-startup
+chroot $ROOTDIR apt-get install -y openssh-server
 rm -f $ROOTDIR/etc/ssh/ssh_host_*
 
 # Raspberry Pi packages.
@@ -54,10 +59,6 @@ chroot $ROOTDIR apt-get install -y ntp avahi-daemon
 #chroot $ROOTDIR mkswap /var/swapfile
 #echo /var/swapfile none swap sw 0 0 >> $ROOTDIR/etc/fstab
 
-# Run fixup script on first boot.
-cp etc/rc.local $ROOTDIR/etc/rc.local
-chmod a+x $ROOTDIR/etc/rc.local
-chroot $ROOTDIR update-rc.d rc.local defaults
 
 # Done.
 rm $ROOTDIR/usr/sbin/policy-rc.d
