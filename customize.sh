@@ -33,6 +33,9 @@ cp etc/fstab $ROOTDIR/etc/fstab
 cp etc/modules $ROOTDIR/etc/modules
 cp etc/network/interfaces $ROOTDIR/etc/network/interfaces
 
+# Allow sudo without password, like default Raspbian.
+sed -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD: ALL/' --in-place /etc/sudoers
+
 # Install kernel.
 mkdir -p $ROOTDIR/lib/modules
 chroot $ROOTDIR apt-get install -y ca-certificates kmod rpi-update
