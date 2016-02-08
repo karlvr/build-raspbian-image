@@ -35,4 +35,4 @@ vmdebootstrap \
     --debootstrapopts="variant=minbase keyring=$(dirname $0)/raspbian.org.gpg" \
     --customize $(dirname $0)/customize.sh
 
-$(dirname $0)/autosizer.sh "$IMAGE" 15
+$(dirname $0)/autosizer.sh "$IMAGE" 50
