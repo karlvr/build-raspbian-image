@@ -34,7 +34,7 @@ cp etc/modules $ROOTDIR/etc/modules
 cp etc/network/interfaces $ROOTDIR/etc/network/interfaces
 
 # Allow sudo without password, like default Raspbian.
-sed -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD: ALL/' --in-place /etc/sudoers
+sed -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD: ALL/' --in-place $ROOTDIR/etc/sudoers
 
 # Install kernel.
 mkdir -p $ROOTDIR/lib/modules
