@@ -68,9 +68,11 @@ if [ -d custom ]; then
 	cp -r custom $ROOTDIR/
 	echo "Running custom scripts..."
 	for i in $ROOTDIR/custom/*.sh ; do
-		chmod +x $i
-		echo "Running custom script: $(basename $i)"
-		chroot $ROOTDIR /custom/$(basename $i)
+		if [ -f $i ]; then
+			chmod +x $i
+			echo "Running custom script: $(basename $i)"
+			chroot $ROOTDIR /custom/$(basename $i)
+		fi
 	done
 	rm -rf $ROODIR/custom
 	echo "Finished running custom scripts."
