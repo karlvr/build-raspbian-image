@@ -45,11 +45,10 @@ First boot
 ----------
 The hostname is `raspberry`. You should be able to SSH to it as the user pi on `raspberry.local`, e.g. `ssh pi@raspberry.local`. The password is `raspberry`.
 
- * Run `raspi-config` and resize the filesystem to fit the SD card. Otherwise you fill run out of space in the root filesystem.
- * Run `raspi-config` to configure time zone and locales, under Internationalisation Options.
- * Change the password for the `pi` user.
-
-
+ * Run `sudo raspi-config` and resize the filesystem to fit the SD card. Otherwise you fill run out of space in the root filesystem.
+ * Run `sudo raspi-config` to configure time zone and locales, under Internationalisation Options.
+ * Change the password for the `pi` user, either manually or using `raspi-config`.
+ * Change the hostname (as raspberry is the default), either manually or using `raspi-config` (under Advanced Options). After you have renamed and rebooted, remember that you'll need to SSH to the new name, e.g. `ssh pi@newhostname.local`.
 
 Recommended packages
 --------------------
