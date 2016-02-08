@@ -25,9 +25,7 @@ Dependencies
 ------------
 
  * `apt-get install apt-cacher-ng` or change mirror URLs in `bootstrap.sh`.
-
  * `apt-get install vmdebootstrap` (at least `0.11` required, perhaps use https://launchpad.net/~0k53d-karl-f830m/+archive/ubuntu/vmdebootstrap)
-
  * `apt-get install binfmt-support qemu-user-static`.
 
 Usage
@@ -45,10 +43,13 @@ Writing the image to an SD card
 
 First boot
 ----------
+The hostname is `raspberry`. You should be able to SSH to it as the user pi on `raspberry.local`, e.g. `ssh pi@raspberry.local`. The password is `raspberry`.
 
  * Run `raspi-config` and resize the filesystem to fit the SD card. Otherwise you fill run out of space in the root filesystem.
-
  * Run `raspi-config` to configure time zone and locales, under Internationalisation Options.
+ * Change the password for the `pi` user.
+
+
 
 Recommended packages
 --------------------
