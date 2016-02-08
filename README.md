@@ -15,6 +15,12 @@ A basic Raspbian with standard networking utilities. Also includes:
 will allow login with the default password.** Host keys are generated on
 first boot.
 
+Downloads
+---------
+Or download a prebuilt image that I've created using this script.
+
+ * Raspbian Jessie: [raspbian-20160208.img.gz](https://dl.dropboxusercontent.com/u/237552/Raspbian/raspbian-20160208.img.gz) (177MB) [PGP signature](signatures/raspbian-20160208.img.gz.asc)
+
 Dependencies
 ------------
 
