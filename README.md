@@ -19,7 +19,7 @@ Downloads
 ---------
 Or download a prebuilt image that I've created using this script.
 
- * Raspbian Jessie: [raspbian-20160208.img.gz](https://dl.dropboxusercontent.com/u/237552/Raspbian/raspbian-20160208.img.gz) (177MB) [PGP signature](https://raw.githubusercontent.com/karlvr/build-raspbian-image/master/signatures/raspbian-20160208.img.gz.asc)
+ * Raspbian Jessie (compatible with RPi2 and RPi3): [raspbian-20160528.img.gz](https://dl.dropboxusercontent.com/u/237552/Raspbian/raspbian-20160528.img.gz) (182MB) [PGP signature](https://raw.githubusercontent.com/karlvr/build-raspbian-image/master/signatures/raspbian-20160528.img.gz.asc)
 
 Dependencies
 ------------
